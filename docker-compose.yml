@@ -1,0 +1,54 @@
+version: "2"
+services:
+  grp-base:
+    container_name: grp-base
+    image: frolvlad/alpine-python3:latest
+    environment:
+      - FLASK_APP=web/app.py
+      - FLASK_DEBUG=1
+      - FLASK_ENV=development
+      - GUNICORN_CMD_ARGS=--reload --log-level=debug
+      - LOG_LEVEL=DEBUG
+      - VIRTUAL_HOST=grp.docker
+    command: ["echo", "I only exist to be extended so I'll just exit, thanks"]
+
+  grp:
+    container_name: grp
+    extends: grp-base
+    build:
+      context: web
+      args:
+        - GITHUB_TOKEN=${GITHUB_TOKEN}
+    ports:
+      - 80
+      - 5000
+    volumes:
+      - ${PWD}:/app
+    command: ["ls", "usr/bin/env"]
+
+  # grp-test:
+  #   container_name: grp-test
+  #   extends: grp-base
+  #   environment:
+  #     - FLASK_DEBUG
+  #   build:
+  #     context: .
+  #     dockerfile: Dockerfile
+  #     args:
+  #       - EXTRA_REQUIREMENTS=requirements-dev.txt
+  #       - GITHUB_TOKEN
+  #   volumes:
+  #     - ${PWD}:/app
+  #   command:
+  #     [
+  #       "python",
+  #       "-m",
+  #       "pytest",
+  #       "-s",
+  #       "-vv",
+  #       "--cov-report=term-missing",
+  #       "--cov=grp",
+  #       "--cov-config=setup.cfg",
+  #       "--cov-fail-under=100",
+  #       "grp/tests",
+  #     ]
