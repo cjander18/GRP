@@ -13,28 +13,28 @@ Go to http://localhost:5000
 
 Rebalance weekly (too expensive when portfolio < 300k)
 
-### Holding
+### Portfolio
 
-20YR Treasuries: TLT
-Gold: BAR
-S&P 500: VOO
-Cash
+- 20YR Treasuries: TLT
+- Gold: BAR
+- S&P 500: VOO
+- Cash
 
 ### Phase 1 (Individual assets)
 
-    - Getting the data -> independent of all else, return arithmetic average and standard dev of asset. Alpha vantage?
-        - TLT/BAR/VOO can all be the same API endpoint (API gateway -> Lambda) called 3 separate times with each ticker
-        - Cash might need its own API endpoint (API gateway -> Lambda) b/c it requires the 3 mo t-bill yield
+- Getting the data -> independent of all else, return arithmetic average and standard dev of asset. Alpha vantage?
+  - TLT/BAR/VOO can all be the same API endpoint (API gateway -> Lambda) called 3 separate times with each ticker
+  - Cash might need its own API endpoint (API gateway -> Lambda) b/c it requires the 3 mo t-bill yield
 
 ### Phase 2 (Portfolio construction)
 
-    - Making the calculations
-        - Central FLASK app (can be nested in an API gateway call to a Lambda)
+- Making the calculations
+  - Central FLASK app (can be nested in an API gateway call to a Lambda)
 
 ### Phase 3 (Portfolio execution)
 
-    - Executing the position updates
-        - One API endpoint (API gateway -> Lambda) to buy/sell TLT/BAR/VOO
+- Executing the position updates
+  - One API endpoint (API gateway -> Lambda) to buy/sell TLT/BAR/VOO
 
 ### Phase 1 (Individual assets)
 
@@ -45,7 +45,7 @@ Cash
 
 - risk free rate (rate of return to use for cash) = yield of the 3 month T-bill
 
-# Phase 2 (Portfolio construction)
+### Phase 2 (Portfolio construction)
 
 - Portfolio arithmetic mean: Asset allocation _ mean + Asset allocation _ mean + ....
 - Portfolio std dev: Square root(asset allocation squared _ asset std dev squared + asset allocation squared _ asset std dev squared + ...)
