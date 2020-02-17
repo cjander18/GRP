@@ -42,10 +42,11 @@ Rebalance weekly (too expensive when portfolio < 300k)
 
 #### Details
 
-- Portfolio arithmetic mean: Asset allocation _ mean + Asset allocation _ mean + ....
-- Portfolio std dev: Square root(asset allocation squared _ asset std dev squared + asset allocation squared _ asset std dev squared + ...)
-- (Arithmetic mean of portfolio - portfolio std dev squared) / 2 = geometric return -> Maximize this
-- Whatever maximizes the geometric returns will tell you the asset allocation between TLT, BAR, VOO, and cash
+portfolioArithmeticMean = assetOnePortfolioAllocation _ assetOneMean + assetTwoPortfolioAllocation _ assetTwoMean + ....
+portfolioStdDev = ((assetOnePortfolioAllocation ** 2) \* (assetOneStdDev ** 2) + (assetTwoPortfolioAllocation ** 2) \* (assetTwoStdDev ** 2) + ...) \*\* 1/2
+geometric return = (portfolioArithmeticMean - portfolioStdDev) / 2 -> Maximize this!
+
+Whatever maximizes the geometric returns will tell you the asset allocation between TLT, BAR, VOO, and cash.
 
 ### Phase 3 (Portfolio execution)
 
