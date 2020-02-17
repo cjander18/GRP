@@ -1,8 +1,9 @@
-version: "2"
+version: "3"
 services:
-  grp-base:
-    container_name: grp-base
+  grp:
+    container_name: grp
     image: frolvlad/alpine-python3:latest
+    build: .
     environment:
       - FLASK_APP=web/app.py
       - FLASK_DEBUG=1
@@ -10,21 +11,10 @@ services:
       - GUNICORN_CMD_ARGS=--reload --log-level=debug
       - LOG_LEVEL=DEBUG
       - VIRTUAL_HOST=grp.docker
-    command: ["echo", "I only exist to be extended so I'll just exit, thanks"]
-
-  grp:
-    container_name: grp
-    extends: grp-base
-    build:
-      context: web
-      args:
-        - GITHUB_TOKEN=${GITHUB_TOKEN}
     ports:
-      - 80
-      - 5000
+      - 5000:5000
     volumes:
       - ${PWD}:/app
-    command: ["ls", "usr/bin/env"]
 
   # grp-test:
   #   container_name: grp-test
