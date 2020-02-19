@@ -2,9 +2,11 @@
 
 ### Getting Started
 
+From the top level directory (i.e. where the docker-compose.yml file lives) run:
+
 ```
-docker build -t grp:latest .
-docker run -d -p 5000:5000 grp
+docker-compose build grp
+docker-compose up grp
 ```
 
 Go to http://localhost:5000
@@ -55,4 +57,4 @@ Whatever maximizes the geometric returns will tell you the asset allocation betw
 
 #### Details
 
-spam egg spam spam...
+turtles candles trees...
