@@ -3,9 +3,18 @@ import pytest
 from grp import create_app
 
 @pytest.fixture
-def client():
-    app = create_app()
-    app.config['TESTING'] = True
-    client = app.test_client()
+def app():
+    app = create_app({
+        'TESTING': True,
+    })
 
-    yield client
+    yield app
+
+@pytest.fixture
+def client(app):
+    return app.test_client()
+
+
+@pytest.fixture
+def runner(app):
+    return app.test_cli_runner()
