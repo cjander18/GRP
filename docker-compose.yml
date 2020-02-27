@@ -5,7 +5,7 @@ services:
     image: frolvlad/alpine-python3:latest
     build: .
     environment:
-      - FLASK_APP=web/app.py
+      - FLASK_APP=grp
       - FLASK_DEBUG=1
       - FLASK_ENV=development
       - GUNICORN_CMD_ARGS=--reload --log-level=debug
@@ -15,10 +15,9 @@ services:
       - 5000:5000
     volumes:
       - ${PWD}:/app
-
   # grp-test:
   #   container_name: grp-test
-  #   extends: grp-base
+  #   extends: grp
   #   environment:
   #     - FLASK_DEBUG
   #   build:
@@ -26,7 +25,6 @@ services:
   #     dockerfile: Dockerfile
   #     args:
   #       - EXTRA_REQUIREMENTS=requirements-dev.txt
-  #       - GITHUB_TOKEN
   #   volumes:
   #     - ${PWD}:/app
   #   command:

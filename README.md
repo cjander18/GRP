@@ -2,9 +2,11 @@
 
 ### Getting Started
 
+From the top level directory (i.e. where the docker-compose.yml file lives) run:
+
 ```
-docker build -t grp:latest .
-docker run -d -p 5000:5000 grp
+docker-compose build grp
+docker-compose up grp
 ```
 
 Go to http://localhost:5000
@@ -42,10 +44,11 @@ Rebalance weekly (too expensive when portfolio < 300k)
 
 #### Details
 
-- Portfolio arithmetic mean: Asset allocation _ mean + Asset allocation _ mean + ....
-- Portfolio std dev: Square root(asset allocation squared _ asset std dev squared + asset allocation squared _ asset std dev squared + ...)
-- (Arithmetic mean of portfolio - portfolio std dev squared) / 2 = geometric return -> Maximize this
-- Whatever maximizes the geometric returns will tell you the asset allocation between TLT, BAR, VOO, and cash
+portfolioArithmeticMean = assetOnePortfolioAllocation _ assetOneMean + assetTwoPortfolioAllocation _ assetTwoMean + ....
+portfolioStdDev = ((assetOnePortfolioAllocation ** 2) \* (assetOneStdDev ** 2) + (assetTwoPortfolioAllocation ** 2) \* (assetTwoStdDev ** 2) + ...) \*\* 1/2
+geometric return = (portfolioArithmeticMean - portfolioStdDev) / 2 -> Maximize this!
+
+Whatever maximizes the geometric returns will tell you the asset allocation between TLT, BAR, VOO, and cash.
 
 ### Phase 3 (Portfolio execution)
 
@@ -54,4 +57,4 @@ Rebalance weekly (too expensive when portfolio < 300k)
 
 #### Details
 
-spam egg spam spam...
+turtles candles trees...
